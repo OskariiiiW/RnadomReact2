@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/mdl.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Kuntien asukastilastoja</title>
+</head>
+<body>
+
+    <div class="mdl-layout">
+
+    <h1>Kuntien asukastilastoja</h1>
+
+    <form method="POST" action="/">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="padding-left: 10px;">
+                <input name="teksti" class="mdl-textfield__input" type="text" id="sample1" placeholder="Hae kuntaa...">
+                
+            </div>
+            <button type="submit" class="mdl-button mdl-button--raised mdl-button--colored">Hae kuntaa</button>
+    </form>
+
+    <% if (kunnat.length > 0 )  { %>
+        <% let kuntalaskuri = 0; %>
+        <% let asukkaat = 0; %>
+        <% let asukasKA = 0; %> 
+        <% let naisia = 0; %>
+
+        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+        <thead>
+          <tr>
+            <th class="mdl-data-table__cell--non-numeric">Nimi</th>
+            <th>Asukasmäärä</th>
+            <th>Miehiä</th>
+            <th>Naisia</th>
+          </tr>
+        </thead>
+  
+        <% kunnat.forEach((kunta) => { %>
+                <%kuntalaskuri = kuntalaskuri + 1;%>
+                <%asukkaat = asukkaat + kunta.asukkaatYhteensa; %>
+                <%naisia = naisia + kunta.asukkaatNaiset;%>
+
+                <tbody>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric"><%=kunta.kunta%></td>
+                        <td><%=kunta.asukkaatYhteensa.toLocaleString('fi-FI')%></td>
+                        <td><%=kunta.asukkaatMiehet.toLocaleString('fi-FI')%></td>
+                        <td><%=kunta.asukkaatNaiset.toLocaleString('fi-FI')%></td>
+                    </tr>
+                </tbody>
+            <%// } %> 
+        <% }); %>    
+
+        </table>
+
+        <%asukasKA = asukkaat / kuntalaskuri; %> 
+        <%naisia = (naisia / asukkaat) * 100; %> 
+
+        <% if (kuntalaskuri > 0) {%>
+            <h4>Kuntien määrä: <%=kuntalaskuri %> </h4>
+            <h4>Asukkaiden keskimäärä: <%=asukasKA.toFixed(2) %></h4>
+            <h4>Naisten osuus: <%=naisia.toFixed() %> %</h4>  
+        <% } else { %>
+            <h4>Kuntia ei löytynyt</h4>
+        <% }%>
+
+    <% } %>
+
+    </div>
+        
+</body>
+</html>

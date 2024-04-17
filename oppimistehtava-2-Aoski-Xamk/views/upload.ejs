@@ -1,0 +1,23 @@
+<%- include("includes/header")%>
+
+    <h2>Lisaa uusi data</h2>
+
+    <% if (Boolean(virhe)) { %>
+        <div class="virhe"><%= virhe %></div>
+
+    <% } %>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+
+        <div class="mdl-textfield">
+
+            <input type="file" class="mdl-textfield__input" name="tiedosto" id="tiedosto">
+
+        </div>
+
+        <button type="submit" class="mdl-button mdl-button--raised mdl-button--colored">Lisää merkintöjä</button>
+        <a href="/" class="mdl-button mdl-button--raised">Palaa alkuun</a>
+
+    </form>
+
+<%- include("includes/footer")%>

@@ -1,0 +1,42 @@
+<%- include("includes/header")%>
+
+        <a href="/upload" class="mdl-button mdl-button--raised mdl-button--colored">Lisää askeldata</a>
+
+        <% if (tiedot.length > 0) { %>
+
+            <% let maaraLaskuri = 0; %>
+            <% let askelLaskuri = 0; %>
+            <% let keskiarvo = 0; %>
+
+            <% tiedot.forEach((askeldata) => { %>
+                <%maaraLaskuri = maaraLaskuri + 1; %>
+                <%askelLaskuri = askelLaskuri + askeldata.askeleet;%>
+                <%keskiarvo = askelLaskuri / maaraLaskuri;%>
+            <% }); %>  
+            
+            <h3>Askeleita yhteensä: <%=askelLaskuri%>. Keskimäärin <%=keskiarvo.toFixed(0)%> askelta päivässä</h3>
+        
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Pvm</th>
+                        <th>Askeleet</th>
+                    </tr>
+                </thead>
+        
+                <% tiedot.forEach((askeldata) => { %>
+                    <tbody>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric"><%=askeldata.pp%>.<%=askeldata.kk%>.<%=askeldata.vvvv%></td>
+                            <td><%=askeldata.askeleet%></td>
+                        </tr>
+                    </tbody>
+                <% }); %>   
+        
+            </table>
+
+        <% } else { %>
+            Ei dataa.
+        <% } %>
+
+<%- include("includes/footer")%>
