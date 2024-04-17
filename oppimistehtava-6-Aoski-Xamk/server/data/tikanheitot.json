@@ -1,0 +1,17 @@
+[
+    {
+      "id": 1,
+      "nimi": "Käy kaupassa",
+      "suoritettu": false
+    },
+    {
+      "id": 2,
+      "nimi": "Sotke",
+      "suoritettu": false
+    },
+    {
+      "id": "62922a5b-49c0-4e40-adb0-ab6b93b72569",
+      "nimi": "Lähde kotiin",
+      "suoritettu": false
+    }
+  ]
